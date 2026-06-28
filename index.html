@@ -618,9 +618,9 @@
         .project-page-lead {
             font-size: 16px; color: rgba(255,255,255,0.85); max-width: 680px; line-height: 1.8;
         }
-        .project-page-body { padding: 80px 0; }
+        .project-page-body { padding: 80px 0; overflow: visible; }
         .project-page-layout {
-            display: grid; grid-template-columns: 1fr 360px; gap: 60px; align-items: start;
+            display: grid; grid-template-columns: 1fr 360px; gap: 60px; align-items: start; align-content: start;
         }
         @media (max-width: 900px) {
             .project-page-layout { grid-template-columns: 1fr; }
@@ -664,7 +664,7 @@
 .project-highlights li::marker {
     color: var(--primary-brown);
 }
-        .project-gallery { position: sticky; top: 100px; }
+        .project-gallery { position: sticky; top: 100px; align-self: start; }
         .project-gallery h3 { font-family: 'Crimson Text', serif; font-size: 22px; color: var(--primary-brown); margin-bottom: 20px; }
         .gallery-placeholder {
             background: var(--white); border: 2px dashed rgba(72,61,32,0.2);
@@ -673,24 +673,42 @@
         }
         .gallery-placeholder .gallery-icon { font-size: 36px; display: block; margin-bottom: 12px; opacity: 0.5; }
         .gallery-placeholder strong { display: block; font-size: 14px; color: var(--text-medium); margin-bottom: 6px; }
-        .gallery-image {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-md);
-            display: block;
-            object-fit: contain;
-            max-height: 500px;
-            background: var(--cream-dark);
-            cursor: zoom-in;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .gallery-image:hover {
-            transform: scale(1.01);
-            box-shadow: var(--shadow-lg);
-        }
+gallery-image {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: block;
+    object-fit: contain;
+    max-height: 420px;
+    background: #ffffff;
+    box-shadow: var(--shadow-md);
+    cursor: zoom-in;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.gallery-image.is-logo {
+    width: 160px;
+    height: 160px;
+    border-radius: 36px;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 32px rgba(72,61,32,0.15);
+}
+.gallery-image:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
 
         /* Lightbox */
+        .pp-inline-gallery {
+    margin-top: 40px;
+}
+.gallery-image--wide {
+    width: 100%;
+    max-height: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 0;
+}
         .lightbox {
             display: none;
             position: fixed;
@@ -839,9 +857,10 @@
                         <div id="pp-description"></div>
                         <p class="project-highlights-title"><strong>Kluczowe działania</strong></p>
                         <ul id="pp-highlights" class="project-highlights"></ul>
+                                                <div id="pp-inline-gallery" class="pp-inline-gallery"></div>
+                        <div id="pp-inline-gallery" class="pp-inline-gallery"></div>
                     </div>
                     <div class="project-gallery">
-                        <h3>Zdjęcia / Widoki</h3>
                         <div id="pp-gallery"></div>
                     </div>
                 </div>
@@ -1069,14 +1088,36 @@ const projects = {
             'Gamifikacja i projektowanie mechanik zaangażowania',
             'Badania jakościowe (IDI) oraz ilościowe (RCT protocol)'
         ],
-        images: ["logo.png", 'Widoki_somna.png'] 
+        images: ["somna_logo.png", 'Widoki_somna.png'] 
     },
-            ghost: {
-                tag: 'Therapeutic App', title: 'Ghost Away',
-                lead: 'Autorski projekt narzędzia wspierającego redukcję lęku telekomunikacyjnego.',
-                description: '<p>Ghost Away to aplikacja terapeutyczna adresująca lęk przed rozmowami telefonicznymi — zjawisko coraz powszechniejsze, szczególnie wśród młodych dorosłych.</p><p>Projekt integruje techniki ekspozycyjne znane z terapii poznawczo-behawioralnej w formie interaktywnych symulacji, które użytkownik może przechodzić we własnym tempie.</p>',
-                highlights: ['Zastosowanie technik ekspozycyjnych w aplikacji mobilnej','Symulacje interaktywne dla budowania pewności siebie','Personalizowana ścieżka terapeutyczna','Interface wspierający progres użytkownika','Integracja elementów gamifikacji'],
-                images: []
+        ghost: {
+                tag: 'Behavioral Design & UX', 
+                title: 'GhostAway',
+                lead: 'Cyfrowa interwencja psychologiczna (ICBT) redukująca lęki telekomunikacyjne i prokrastynację komunikacyjną u młodych dorosłych.',
+                description: `
+<p>GhostAway to projekt mobilnej interwencji internetowej stworzonej z myślą o osobach doświadczających silnego oporu i stresu przed wchodzeniem w interakcje synchroniczne oraz asynchroniczne. Projekt aktywnie przeciwdziała strategii unikania (tzw. <em>ghostingowi</em>) oraz prokrastynacji związanej z odkładaniem odpowiedzi na wiadomości tekstowe i e-mail.</p>
+
+    <p><strong>Fundamenty badawcze:</strong></p>
+    <p>Model teoretyczny aplikacji został oparty na internetowej terapii poznawczo-behawioralnej (ICBT) oraz Teorii Poczucia Własnej Skuteczności (<em>Self-Efficacy</em>) Alberta Bandury. Struktura interwencji zakłada stymulowanie sprawstwa użytkownika poprzez cztery źródła skuteczności (własne doświadczenia, modele, przekonywanie werbalne oraz stały monitoring stanu emocjonalnego).</p>
+
+    <p><strong>Kluczowe moduły:</strong></p>
+    <p>
+        <p><strong>Edukacyjny ChatBot:</strong> Narzędzie dostępne 24/7, które dostarcza psychoedukację, analizuje odpowiedzi użytkownika i oferuje natychmiastową informację zwrotną w celu rozładowania napięcia emocjonalnego.</p>
+        <p><strong>Panel Zadań Interaktywnych:</strong> Bezpieczne środowisko symulacyjne (fikcyjne wiadomości SMS/e-mail) o rosnącym poziomie trudności, wykorzystujące mechanizm <em>Timera</em> do stymulowania szybszego podejmowania decyzji.</p>
+        <p><strong>System Habit-Building:</strong> Mechanizm grywalizacji oparty na utrzymywaniu codziennej passy (<em>Streak</em>) oraz zbieraniu monet (<em>Coins</em>) wymiennych na personalizację spersonalizowanego Awatara.</p>
+    </p>
+
+    <p><strong>Refleksja projektowa:</strong></p>
+    <p>Projekt GhostAway postawił naszemu zespołowi wyzwanie zaprojektowania doświadczenia, które z jednej strony operuje na wrażliwym obszarze lęków społecznych, a z drugiej – musi motywować do działania za pomocą grywalizacji. Kluczem do sukcesu okazało się zbalansowanie pętli dopaminowej (zadanie -> monety -> customizacja) z elementami odbarczającymi stres, takimi jak codzienne monitorowanie poziomu lęku w skali 1-5. Projekt udowodnił mi, jak kluczowe w Digital Therapeutics (DTx) jest stworzenie „bezpiecznego środowiska testowego”, w którym użytkownik może popełniać błędy i budować nawyki bez poczucia bycia ocenianym.</p>
+`,
+                highlights: [
+                    'Projektowanie cyfrowych interwencji psychologicznych (ICBT)',
+                    'Implementacja teorii Self-Efficacy Alberta Bandury w strukturę UX',
+                    'Projektowanie mechanik habit-building (Streak, pętle dopaminowe)',
+                    'Zastosowanie kontrolowanej ekspozycji i symulacji w interfejsie',
+                    'Opracowanie metodologii ewaluacji (eksperyment, kwestionariusz dedykowany, SUS)'
+                ],
+                images: ["logo_ghost.png", "widoki_ghost.png"] 
             },
             water: {
                 tag: 'Pro-Environmental', title: 'Każda kropla ma znaczenie',
@@ -1118,11 +1159,18 @@ const projects = {
             const ul = document.getElementById('pp-highlights');
             ul.innerHTML = p.highlights.map(h => '<li>' + h + '</li>').join('');
             const gallery = document.getElementById('pp-gallery');
-            if (p.images && p.images.length > 0) {
-                gallery.innerHTML = p.images.map(src =>
-                    `<img src="${src}" alt="${p.title}" class="gallery-image" onclick="openLightbox('${src}', '${p.title}')">`
-                ).join('');
-            } else {
+            const inlineGallery = document.getElementById('pp-inline-gallery');
+if (p.images && p.images.length > 0) {
+    const logoSrc = p.images[0];
+    const viewImgs = p.images.slice(1);
+    gallery.innerHTML = `<img src="${logoSrc}" alt="${p.title}" class="gallery-image is-logo" onclick="openLightbox('${logoSrc}', '${p.title}')">`;
+    if (inlineGallery) {
+        inlineGallery.innerHTML = viewImgs.map(src =>
+            `<img src="${src}" alt="${p.title}" class="gallery-image gallery-image--wide" onclick="openLightbox('${src}', '${p.title}')">`
+        ).join('');
+    }
+} else {
+    if (inlineGallery) inlineGallery.innerHTML = '';
                 gallery.innerHTML = '<div class="gallery-placeholder"><span class="gallery-icon">🖼️</span><strong>Tu pojawią się zdjęcia projektu</strong>Możesz dodać widoki aplikacji, screenshoty lub makiety. Wystarczy podać ścieżki do plików w tablicy images w kodzie.</div><div class="gallery-placeholder"><span class="gallery-icon">📐</span><strong>Widok 2 — np. prototyp / makieta</strong>Każdy projekt może mieć dowolną liczbę zdjęć.</div>';
             }
             document.getElementById('main-page').style.display = 'none';
