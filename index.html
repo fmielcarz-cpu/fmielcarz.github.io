@@ -686,12 +686,13 @@ gallery-image {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .gallery-image.is-logo {
-    width: 160px;
-    height: 160px;
+    width: 300px;
+    height: 300px;
     border-radius: 36px;
     object-fit: cover;
     margin: 0 auto 20px;
-    box-shadow: 0 8px 32px rgba(72,61,32,0.15);
+    background: transparent;
+    box-shadow: none;
 }
 .gallery-image:hover {
     transform: scale(1.02);
@@ -743,6 +744,8 @@ gallery-image {
             border: none;
         }
         .lightbox-close:hover { color: white; }
+        .project-credits { margin-top: 40px; padding: 14px 18px; background: rgba(72,61,32,0.05); border-left: 3px solid var(--primary-brown); ... }
+        .project-credits-label { font-weight: 600; color: var(--primary-brown); }
     </style>
 </head>
 <body>
@@ -788,7 +791,7 @@ gallery-image {
             <div class="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card" onclick="showProject('somna')">
-                    <span class="project-tag">Behavioral Design</span>
+                    <span class="project-tag">Behavioral Design & UX</span>
                     <h3>Somna</h3>
                     <p>Aplikacja wspierająca higienę snu w oparciu o modele zmiany zachowań. Przeprowadziłem badania i opracowałem prototyp UX z personalizacją.</p>
                     <span class="project-view-btn">Więcej szczegółów →</span>
@@ -833,6 +836,24 @@ gallery-image {
                     <p>Aplikacja do zarządzania żywnością z AI-generated przepisami i skanowaniem kodów kreskowych.</p>
                     <span class="project-view-btn">Więcej szczegółów →</span>
                 </div>
+                
+                <!-- Project 7-->
+                <div class="project-card" onclick="showProject('sunseeker')">
+                    <span class="project-tag">Product Design</span>
+                    <h3>Sunseeker</h3>
+                    <p>Badanie potrzeb użytkowników systemów IoT. Etnometryczne IDI, personas i user journey mapping.</p>
+                    <span class="project-view-btn">Więcej szczegółów →</span>
+                </div>
+                <!-- Project 8 -->
+<div class="project-card" onclick="showProject('bodyimage')">
+    <span class="project-tag">Bachelor Thesis • In Progress</span>
+    <h3>Positive Body Image</h3>
+    <p>
+        Projekt pracy licencjackiej dotyczący internetowej interwencji
+        wspierającej pozytywny obraz własnego ciała u osób trenujących siłowo.
+    </p>
+    <span class="project-view-btn">Więcej szczegółów →</span>
+</div>
             </div>
         </div>
     </section>
@@ -858,6 +879,7 @@ gallery-image {
                         <p class="project-highlights-title"><strong>Kluczowe działania</strong></p>
                         <ul id="pp-highlights" class="project-highlights"></ul>
                                                 <div id="pp-inline-gallery" class="pp-inline-gallery"></div>
+                        <div id="pp-credits"></div>
                         <div id="pp-inline-gallery" class="pp-inline-gallery"></div>
                     </div>
                     <div class="project-gallery">
@@ -960,6 +982,24 @@ gallery-image {
             <span class="modal-close" onclick="closeModal('modal-fridgely')">&times;</span>
             <span class="modal-tag">AI & Innovation</span>
             <h2>Fridgely</h2>
+            <p class="modal-description">Autorska aplikacja do zarządzania żywnością z integracją AI i skanowaniem kodów kreskowych.</p>
+            <ul class="modal-highlights">
+                <li>Opracowanie aplikacji typu "Smart Fridge"</li>
+                <li>Integracja skanowania kodów kreskowych (barcode API)</li>
+                <li>Wirtualna lodówka z catalogiem produktów</li>
+                <li>System powiadomień o datach ważności</li>
+                <li>AI generowanie przepisów kulinarnych na bazie dostępnych produktów</li>
+                <li>Projekt realizowany w modelu vibecoding (AI-assisted development)</li>
+            </ul>
+        </div>
+    </div>
+
+        <!-- Sunseeker Modal -->
+    <div id="modal-sunseeker" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-sunseeker')">&times;</span>
+            <span class="modal-tag">AI & Innovation</span>
+            <h2>Sunseeker</h2>
             <p class="modal-description">Autorska aplikacja do zarządzania żywnością z integracją AI i skanowaniem kodów kreskowych.</p>
             <ul class="modal-highlights">
                 <li>Opracowanie aplikacji typu "Smart Fridge"</li>
@@ -1088,10 +1128,12 @@ const projects = {
             'Gamifikacja i projektowanie mechanik zaangażowania',
             'Badania jakościowe (IDI) oraz ilościowe (RCT protocol)'
         ],
-        images: ["somna_logo.png", 'Widoki_somna.png'] 
+        images: ["somna_logo.png", 'Widoki_somna.png'],
+        credits: 'Projekt zespołowy — współautorzy: Julia Chabińska, Nina Lange' 
+
     },
         ghost: {
-                tag: 'Behavioral Design & UX', 
+                tag: 'Therapeutic APP', 
                 title: 'GhostAway',
                 lead: 'Cyfrowa interwencja psychologiczna (ICBT) redukująca lęki telekomunikacyjne i prokrastynację komunikacyjną u młodych dorosłych.',
                 description: `
@@ -1117,46 +1159,206 @@ const projects = {
                     'Zastosowanie kontrolowanej ekspozycji i symulacji w interfejsie',
                     'Opracowanie metodologii ewaluacji (eksperyment, kwestionariusz dedykowany, SUS)'
                 ],
-                images: ["logo_ghost.png", "widoki_ghost.png"] 
+                images: ["logo_ghost.png", "widoki_ghost.png"],
+                credits: 'Projekt zespołowy — współautorzy: Julia Chabińska, Nina Lange, Konstanty Paszkowski'
             },
-            water: {
-                tag: 'Pro-Environmental', title: 'Każda kropla ma znaczenie',
-                lead: 'Projekt behawioralny zmian nawyków zużycia wody w oparciu o Construal-level theory.',
-                description: '<p>Projekt kampanii proekologicznej opartej na teorii poziomów interpretacji (Trope & Liberman). Celem było opracowanie skuteczniejszych komunikatów skłaniających do oszczędzania wody.</p><p>Analizowałem, jak odległość psychologiczna (temporalna, przestrzenna, społeczna) wpływa na gotowość odbiorców do zmiany codziennych nawyków związanych z zużyciem wody.</p>',
-                highlights: ['Opracowanie strategii zmiany nawyków na bazie teorii Trope & Liberman','Optymalizacja komunikacji proekologicznej','Zwiększenie poczucia sprawczości odbiorców','Design kampanii edukacyjnej','Analiza zachowań konsumenckich i motivacji'],
-                images: []
-            },
-            motoflow: {
-                tag: 'Business Analysis', title: 'MotoFlow',
-                lead: 'Analiza biznesowa serwisu samochodowego na podstawie case study z wykorzystaniem metodyk analitycznych.',
-                description: '<p>MotoFlow to kompleksowa analiza biznesowa przeprowadzona dla fikcyjnego serwisu samochodowego jako projekt studyjny. Projekt obejmował pełen zestaw narzędzi analizy produktowej.</p><p>Zastosowałem podejście wielometodyczne, łącząc analizę strategiczną z mapowaniem procesów i zarządzaniem wymaganiami, co pozwoliło wypracować konkretne rekomendacje dla zespołu deweloperskiego.</p>',
-                highlights: ['Przeprowadzenie analizy SWOT/TOWS','Aplikacja metodyki KANO do priorytyzacji funkcji','Użycie MoSCoW dla zarządzania wymaganiami','Tworzenie User Stories dla zespołu deweloperskiego','Optymalizacja ścieżek pracy personelu (As-Is / To-Be)'],
-                images: []
-            },
+water: {
+    tag: 'PRO-ENVIRONMENTAL', 
+    title: 'Każda kropla ma znaczenie',
+    lead: 'Kampania proekologiczna oparta na behawioralnych technikach zmiany nawyków w celu redukcji niepotrzebnego zużycia wody w gospodarstwach domowych.',
+    description: `
+<p>Projekt „Każda kropla ma znaczenie” powstał jako odpowiedź na wylosowane zadanie projektowe dla wodociągów miejskich. Wyzwanie polegało na stworzeniu programu psychologicznego, który odniesie się do 20-procentowego wzrostu zużycia wody w mieście, wynikającego z codziennych nawyków mieszkańców, a nie z sektora przemysłowego.</p>
+
+    <p><strong>Fundamenty badawcze:</strong></p>
+    <p>Model teoretyczny projektu opiera się na <em>Teorii poziomów interpretacji (Construal Level Theory)</em> Trope i Libermana oraz <em>Transteoretycznym Modelu Zmiany</em>. Interwencja koncentruje się na redukcji dystansu psychologicznego między abstrakcyjnym zużyciem wody a konkretnymi konsekwencjami środowiskowymi, przesuwając użytkowników z fazy prekontemplacji w stronę gotowości do zmiany.</p>
+
+    <p><strong>Kluczowe moduły:</strong></p>
+    <p>
+        <p><strong>Spersonalizowany Feedback (Deskryptywny/Normatywny):</strong> Mechanizm dostarczający konkretne dane o zużyciu w zestawieniu ze średnią dla danej okolicy, uświadamiający skalę różnic w skali roku.</p>
+        <p><strong>Moduł Reatrybucji Problemu:</strong> Moduł edukacyjny korygujący błędne przekonania, że zużycie wody zależy wyłącznie od przemysłu, wskazujący bezpośredni wpływ nawyków domowych.</p>
+        <p><strong>Komunikacja wizualna:</strong> System plakatów i komunikatów obrazujących abstrakcyjne dane (np. roczne zapotrzebowanie tysięcy gospodarstw) w celu urealnienia skutków zachowań.</p>
+    </p>
+
+    <p><strong>Refleksja projektowa:</strong></p>
+    <p>Projektowanie kampanii wymagało przekucia abstrakcyjnych danych statystycznych na język zrozumiały dla przeciętnego mieszkańca miasta. Kluczowym wyzwaniem było przesunięcie odpowiedzialności (reatrybucja) z czynników zewnętrznych na sprawczość jednostki bez wywoływania poczucia winy. Projekt udowodnił, jak istotne w komunikacji proekologicznej jest „ukonkretnienie” odległych skutków klimatycznych, co pozwala skuteczniej motywować do zmiany codziennych nawyków.</p>
+`,
+    highlights: [
+        'Opracowanie strategii zmiany nawyków w oparciu o teorię Trope & Liberman',
+        'Optymalizacja komunikacji proekologicznej z wykorzystaniem norm społecznych',
+        'Zwiększenie poczucia sprawczości odbiorców poprzez feedback normatywny',
+        'Design kampanii edukacyjnej zorientowanej na redukcję dystansu psychologicznego',
+        'Analiza zachowań konsumenckich i motywacji w modelu transteoretycznym'
+    ],
+    images: ["water_logo.png", "water_view.png"] 
+},
+motoflow: {
+    tag: 'Business Analysis', 
+    title: 'MotoFlow',
+    lead: 'Kompleksowa analiza biznesowa systemu obsługi serwisów samochodowych, mająca na celu eliminację kolejek i chaosu komunikacyjnego w modelu "serwis bez stresu".',
+    description: `
+<p>MotoFlow to projekt realizujący wizję „serwisu bez kolejki i stresu”, który ma sprawić, że dbanie o samochód stanie się tak intuicyjne, jak zamawianie jedzenia. Projekt powstał w odpowiedzi na realne wyzwania branży: sezonowość, chaos komunikacyjny oraz rosnące ryzyko związane z niedotrzymaniem terminów badań technicznych.</p>
+
+    <p><strong>Fundamenty analizy:</strong></p>
+    <p>Zastosowano wielometodyczne podejście, łącząc narzędzia makrootoczenia (PESTLE, 5 Sił Portera) z analizą strategiczną (SWOT/TOWS). Projekt obejmował pełną ścieżkę: od identyfikacji interesariuszy (Diagności, Mechanicy, Magazynierzy), po modelowanie procesów biznesowych i priorytetyzację funkcjonalności dla budżetu operacyjnego 750 000 PLN.</p>
+
+    <p><strong>Kluczowe moduły:</strong></p>
+    <p>
+        <p><strong>Zarządzanie Procesami (As-Is / To-Be):</strong> Optymalizacja ścieżek pracy zespołu operacyjnego (8-10 osób) z wykorzystaniem tabletów do zarządzania statusami zadań w czasie rzeczywistym.</p>
+        <p><strong>Moduł SKP Guard:</strong> Innowacyjne rozwiązanie automatyzujące przypomnienia o badaniach technicznych (14, 7 i 3 dni przed terminem) oraz płatności in-app, chroniące klienta przed mandatami.</p>
+        <p><strong>Ekosystem Predictive Maintenance:</strong> Funkcjonalność integrująca diagnostykę bieżnika opon z systemami CRM, pozwalająca na generowanie spersonalizowanych ofert serwisowych w oparciu o stan techniczny pojazdu.</p>
+    </p>
+
+    <p><strong>Refleksja projektowa:</strong></p>
+    <p>Projekt MotoFlow udowodnił, jak kluczowe w analizie biznesowej jest zrozumienie przejścia z modelu „klienta detalicznego” na obsługę flotową. Wyzwaniem było zbalansowanie niskich barier wejścia do branży motoryzacyjnej poprzez stworzenie wysokiej bariery technologicznej. Dzięki precyzyjnej analizie interesariuszy udało się zmapować procesy tak, aby system nie tylko automatyzował techniczne aspekty obsługi, ale przede wszystkim poprawiał doświadczenie użytkownika w stresujących sytuacjach awaryjnych.</p>
+`,
+    highlights: [
+        'Przeprowadzenie analizy strategicznej SWOT/TOWS oraz PESTLE',
+        'Zastosowanie metodyki KANO i MoSCoW do priorytetyzacji backlogu',
+        'Optymalizacja procesów warsztatowych (As-Is / To-Be) dla zespołów 2-osobowych',
+        'Identyfikacja i analiza interesariuszy (IDI) w strukturze warsztatowej',
+        'Budowa strategii skalowania systemu: od klienta detalicznego do obsługi flotowej'
+    ],
+    images: ["motoflow_logo.png", "motoflow_view.png"],
+    credits: 'Projekt zespołowy — współautorzy: Julia Chabińska, Nina Lange, Konstanty Paszkowski' 
+},
             smarthome: {
                 tag: 'UX Research', title: 'Smart Home Insights',
                 lead: 'Badanie potrzeb użytkowników systemów IoT z wykorzystaniem etnometodologicznych podejść badawczych.',
-                description: '<p>Projekt badawczy skupiający się na zrozumieniu, jak użytkownicy na co dzień wchodzą w interakcję z urządzeniami inteligentnego domu. Zastosowałem podejście etnometodologiczne, obserwując uczestników w ich naturalnym środowisku.</p><p>Wyniki badań przełożyłem na konkretne rekomendacje projektowe i wymagania funkcjonalne, które mogą służyć jako punkt wyjścia dla zespołów produktowych.</p>',
-                highlights: ['Realizacja badań jakościowych (etnometodologia, IDI)','Stworzenie detailowanych personas użytkowników','Mapowanie podróży użytkownika (User Journey Mapping)','Analiza pain points i needs','Translacja insightów na wymagania funkcjonalne'],
-                images: []
+description: `
+    <p>Projekt badawczy skupiony na zrozumieniu, jak technologia Smart Home integruje się z codziennością mieszkańców współczesnych miast. Celem było wyjście poza techniczne aspekty urządzeń i dotarcie do autentycznych emocji, obaw i oczekiwań osób aktywnie korzystających z rozwiązań inteligentnego domu.</p>
+
+    <p><strong>Metodologia badawcza:</strong></p>
+    <p>Proces opierał się na indywidualnych wywiadach pogłębionych (IDI) przeprowadzonych w naturalnym środowisku respondentów. Zebrany materiał został poddany rygorystycznej analizie tematycznej, co pozwoliło na wyodrębnienie kluczowych kategorii, takich jak wpływ na komfort, poczucie bezpieczeństwa oraz granice zaangażowania technologii w życie prywatne.</p>
+
+    <p><strong>Kluczowe obszary analizy:</strong></p>
+    <p>
+        <p><strong>Relacja Człowiek-Maszyna:</strong> Badanie więzi z technologią i zjawiska antropomorfizacji urządzeń, które – zgodnie z wynikami – stają się dla użytkowników swoistymi „towarzyszami” życia.</p>
+        <p><strong>Granice Kontroli:</strong> Analiza lęku przed pełną autonomią systemów oraz identyfikacja potrzeby zachowania sprawstwa i decyzyjności przez domowników.</p>
+        <p><strong>Bariery i Szanse (SWOT):</strong> Mapowanie problemów z konfiguracją i prywatnością danych w zestawieniu z korzyściami, takimi jak oszczędność czasu, poprawa zdrowia i jakości życia.</p>
+    </p>
+
+    <p><strong>Refleksja projektowa:</strong></p>
+    <p>Badanie ujawniło, że sukces technologii Smart Home nie zależy wyłącznie od stopnia jej zaawansowania, lecz od umiejętności zachowania balansu między wsparciem a inwazyjnością. Użytkownicy poszukują technologii „niewidocznej”, która automatyzuje rutynę, ale nie odbiera im kontroli nad domem. Praca ta stała się merytorycznym fundamentem dla projektów hardware’owych, takich jak Sunseeker, definiując standardy projektowania zorientowanego na zaufanie i dobrostan.</p>
+`,
+    highlights: [
+        'Zaprojektowanie i realizacja autorskich scenariuszy wywiadów pogłębionych (IDI)',
+        'Zastosowanie analizy tematycznej i kodowania do identyfikacji wzorców zachowań użytkowników',
+        'Identyfikacja psychologicznych "granic autonomii" jako kluczowego czynnika akceptacji technologii',
+        'Opracowanie strategicznej analizy SWOT dla ekosystemu rozwiązań Smart Home',
+        'Synteza wniosków badawczych w formie raportu wspierającego procesy User-Centered Design'
+    ],
+                images: ["smarthome_logo.png", "smarthome_view.png"],
+                credits: 'Projekt zespołowy — współautorzy: Maja Bińkiewicz, Bartłomiej Adamiec, Zuzanna Bednarek, Antoni Zalewski'
             },
-            fridgely: {
-                tag: 'AI & Innovation', title: 'Fridgely',
-                lead: 'Autorska aplikacja do zarządzania żywnością z integracją AI i skanowaniem kodów kreskowych.',
-                description: '<p>Fridgely to aplikacja mobilna, którą opracowałem samodzielnie w modelu vibecoding (AI-assisted development). Rozwiązuje realny problem marnowania żywności w gospodarstwach domowych.</p><p>Aplikacja pozwala skanować kody kreskowe produktów, śledzić daty ważności i — dzięki integracji z AI — generować propozycje przepisów na podstawie tego, co aktualnie znajduje się w lodówce użytkownika.</p>',
+fridgely: {
+    tag: 'AI & Innovation', 
+    title: 'Fridgely',
+    lead: 'Autorska aplikacja mobilna wspierająca redukcję marnowania żywności poprzez inteligentne zarządzanie zapasami i zaawansowaną grywalizację.',
+    description: `
+<p>Fridgely to projekt stworzony w odpowiedzi na osobiste wyzwania związane z marnowaniem jedzenia. Aplikacja przekształca rutynowy obowiązek kontrolowania dat ważności produktów w angażującą grę, integrując praktyczne zarządzanie domową spiżarnią z silnym komponentem społecznościowym.</p>
+
+    <p><strong>Fundamenty produktu:</strong></p>
+    <p>Rdzeniem Fridgely jest integracja z zewnętrznym API do generowania przepisów, które automatycznie sugeruje potrawy na bazie produktów z krótką datą ważności. System został zaprojektowany tak, aby zminimalizować barierę wejścia i uczynić „ratowanie jedzenia” satysfakcjonującym doświadczeniem.</p>
+
+    <p><strong>Wyzwania techniczne:</strong></p>
+    <p>Największym wyzwaniem w projekcie jest zapewnienie stabilnego działania modułu <em>Fridgely AI</em>. Integracja z zewnętrznym kluczem API wymaga stworzenia odpornego na błędy warstwy pośredniej (middleware), która obsługuje limity zapytań, opóźnienia w odpowiedziach oraz specyficzne formatowanie danych wejściowych. Praca nad tym modułem jest kluczowa dla utrzymania płynności działania aplikacji przy dużej liczbie zapytań o przepisy.</p>
+
+    <p><strong>Kluczowe moduły:</strong></p>
+    <p>
+        <p><strong>Smart Inventory & Notifications:</strong> System inteligentnych powiadomień, które ostrzegają o kończącej się przydatności produktów.</p>
+        <p><strong>Społecznościowa Tablica Przepisów:</strong> Platforma wymiany doświadczeń, gdzie użytkownicy publikują przepisy stworzone z „uratowanych” produktów.</p>
+        <p><strong>System Progresji (XP & Coins):</strong> Mechanizm grywalizacji – użytkownicy zdobywają doświadczenie i walutę za regularność i proekologiczne aktywności.</p>
+    </p>
+
+    <p><strong>Refleksja projektowa:</strong></p>
+    <p>Fridgely to dowód na to, jak skutecznie łączyć technologię z nauką dobrych nawyków. Projekt od początku powstawał w duchu vibecodingu – procesu opartego na intuicyjnym, szybkim prototypowaniu, gdzie priorytetem było osiągnięcie odpowiedniego 'flow' aplikacji i satysfakcji z jej użytkowania, a nie tylko sztywne trzymanie się założeń. Wyzwaniem technicznym było zbalansowanie złożoności algorytmów AI (Fridgely AI) z prostotą interfejsu. Projekt udowodnił mi, jak ważna w nowoczesnym programowaniu jest odporność aplikacji na awarie zewnętrznych serwisów (API) i jak dużą rolę w retencji użytkownika odgrywa dopracowany, emocjonalny design, który rozwijałem w oparciu o moje własne potrzeby</p>
+`,
+    highlights: [
+        'Zarządzanie integracją zewnętrznych API w środowisku produkcyjnym',
+        'Projektowanie pełnej ścieżki użytkownika (End-to-End)',
+        'Implementacja zaawansowanego systemu grywalizacji (XP, poziomy, economy)',
+        'Optymalizacja wydajności modułów AI w aplikacjach mobilnych',
+        'Budowa strategii retencyjnej opartej na personalizacji'
+    ],
+    images: ["fridgely_logo.png", "fridgely_view.png", "fridgely_view2.png"], 
+},
+            sunseeker: {
+                tag: 'Product Design', 
+                title: 'Sunseeker',
+                lead: 'Kampania proekologiczna oparta na behawioralnych technikach zmiany nawyków w celu redukcji niepotrzebnego zużycia wody w gospodarstwach domowych.',
+                description: `
+<p>Projekt „Każda kropla ma znaczenie” powstał jako odpowiedź na wylosowane zadanie projektowe dla wodociągów miejskich. Wyzwanie polegało na stworzeniu programu psychologicznego, który odniesie się do 20-procentowego wzrostu zużycia wody w mieście, wynikającego z codziennych nawyków mieszkańców, a nie z sektora przemysłowego.</p>
+
+    <p><strong>Fundamenty badawcze:</strong></p>
+    <p>Model teoretyczny projektu opiera się na <em>Teorii poziomów interpretacji (Construal Level Theory)</em> Trope i Libermana oraz <em>Transteoretycznym Modelu Zmiany</em>. Interwencja koncentruje się na redukcji dystansu psychologicznego między abstrakcyjnym zużyciem wody a konkretnymi konsekwencjami środowiskowymi, przesuwając użytkowników z fazy prekontemplacji w stronę gotowości do zmiany.</p>
+
+    <p><strong>Kluczowe moduły:</strong></p>
+    <p>
+        <p><strong>Spersonalizowany Feedback (Deskryptywny/Normatywny):</strong> Mechanizm dostarczający konkretne dane o zużyciu w zestawieniu ze średnią dla danej okolicy, uświadamiający skalę różnic w skali roku.</p>
+        <p><strong>Moduł Reatrybucji Problemu:</strong> Moduł edukacyjny korygujący błędne przekonania, że zużycie wody zależy wyłącznie od przemysłu, wskazujący bezpośredni wpływ nawyków domowych.</p>
+        <p><strong>Komunikacja wizualna:</strong> System plakatów i komunikatów obrazujących abstrakcyjne dane (np. roczne zapotrzebowanie tysięcy gospodarstw) w celu urealnienia skutków zachowań.</p>
+    </p>
+
+    <p><strong>Refleksja projektowa:</strong></p>
+    <p>Projektowanie kampanii wymagało przekucia abstrakcyjnych danych statystycznych na język zrozumiały dla przeciętnego mieszkańca miasta. Kluczowym wyzwaniem było przesunięcie odpowiedzialności (reatrybucja) z czynników zewnętrznych na sprawczość jednostki bez wywoływania poczucia winy. Projekt udowodnił, jak istotne w komunikacji proekologicznej jest „ukonkretnienie” odległych skutków klimatycznych, co pozwala skuteczniej motywować do zmiany codziennych nawyków.</p>
+`,
                 highlights: ['Opracowanie aplikacji typu "Smart Fridge"','Integracja skanowania kodów kreskowych (barcode API)','Wirtualna lodówka z catalogiem produktów','System powiadomień o datach ważności','AI generowanie przepisów kulinarnych na bazie dostępnych produktów','Projekt realizowany w modelu vibecoding (AI-assisted development)'],
-                images: []
-            }
+                images: ['sunseeker_logo.png', 'sunseeker_view.png'],
+                credits: 'Projekt zespołowy — współautorzy: Julia Chabińska, Maja Bińkiewicz, Lena Ziemlewska, Bartłomiej Adamiec'        
+            },
+bodyimage: {
+    tag: 'Bachelor Thesis • In Progress',
+    title: 'Positive Body Image',
+    lead: 'Projekt cyfrowej mikrointerwencji wspierającej pozytywny obraz ciała u osób trenujących siłowo – badanie potrzeb i prototypowanie rozwiązania.',
+    description: `
+<p>Projekt realizowany w ramach pracy licencjackiej na kierunku Psychologia i Informatyka. Celem pracy jest zaprojektowanie oraz wstępne zweryfikowanie internetowej mikrointerwencji, która ma na celu promowanie pozytywnego wizerunku ciała wśród osób uprawiających trening siłowy, co stanowi odpowiedź na współczesne wyzwania związane z presją wizualną w środowiskach fitness.</p>
+
+<p><strong>Założenia badawcze:</strong></p>
+<p>Praca łączy rygor metodologii naukowej z praktyką projektową. Badanie koncentruje się na analizie potrzeb użytkowników oraz tworzeniu prototypu aplikacji mobilnej, która wykorzystuje techniki zmiany zachowań (BCT) do poprawy dobrostanu psychicznego użytkowników.</p>
+
+<p><strong>Kluczowe aspekty pracy:</strong></p>
+<p>
+    <ul>
+        <p><strong>Analiza literatury:</strong> Przegląd najnowszych badań nad <em>fitspiration</em> i <em>thinspiration</em> i nie tylko oraz ich wpływu na obraz własnego ciała.</li>
+        <p><strong>Projektowanie prototypu:</strong> Tworzenie interfejsu aplikacji, który sprzyja adaptacyjnemu postrzeganiu własnej sylwetki.</li>
+        <p><strong>Badania jakościowe:</strong> Analiza potrzeb osób trenujących siłowo w kontekście relacji z własnym ciałem.</li>
+    </ul>
+</p>
+
+<p><strong>Status:</strong></p>
+<p>Projekt jest w fazie realizacji. Praca obejmuje pełen proces: od zdefiniowania problemu badawczego, przez przegląd teorii, aż po przygotowanie struktury prototypu i metodologii badań empirycznych.</p>
+`,
+
+    highlights: [
+        'Projektowanie internetowej interwencji psychologicznej (Evidence-Based)',
+        'Integracja psychologii pozytywnej z projektowaniem UX/UI',
+        'Zastosowanie technik zmiany zachowań (Behavior Change Techniques)',
+        'Analiza potrzeb i doświadczeń osób aktywnych fizycznie',
+        'Praca dyplomowa łącząca obszary psychologii i informatyki',
+        'Badania nad wpływem mediów cyfrowych na wizerunek własnego ciała'
+    ],
+
+    images: [] 
+}
         };
 
-        function showProject(id) {
-            const p = projects[id];
-            if (!p) return;
+function showProject(id, pushHistory = true) {
+    const p = projects[id];
+    if (!p) return;
+    if (pushHistory) {
+        history.pushState({ project: id }, '', '#' + id);
+    }
             document.getElementById('pp-tag').textContent = p.tag;
             document.getElementById('pp-title').textContent = p.title;
             document.getElementById('pp-lead').textContent = p.lead;
             document.getElementById('pp-description').innerHTML = p.description;
             const ul = document.getElementById('pp-highlights');
+            const creditsEl = document.getElementById('pp-credits');
+            if (p.credits) {
+                creditsEl.innerHTML = '<div class="project-credits">' + p.credits + '</div>';
+            } else {
+                creditsEl.innerHTML = '';
+            }
             ul.innerHTML = p.highlights.map(h => '<li>' + h + '</li>').join('');
             const gallery = document.getElementById('pp-gallery');
             const inlineGallery = document.getElementById('pp-inline-gallery');
@@ -1171,18 +1373,38 @@ if (p.images && p.images.length > 0) {
     }
 } else {
     if (inlineGallery) inlineGallery.innerHTML = '';
-                gallery.innerHTML = '<div class="gallery-placeholder"><span class="gallery-icon">🖼️</span><strong>Tu pojawią się zdjęcia projektu</strong>Możesz dodać widoki aplikacji, screenshoty lub makiety. Wystarczy podać ścieżki do plików w tablicy images w kodzie.</div><div class="gallery-placeholder"><span class="gallery-icon">📐</span><strong>Widok 2 — np. prototyp / makieta</strong>Każdy projekt może mieć dowolną liczbę zdjęć.</div>';
+                gallery.innerHTML = '<div class="gallery-placeholder"><span class="gallery-icon">🖼️</span><strong>Tu pojawią się zdjęcia projektu</strong></div><div class="gallery-placeholder"><span class="gallery-icon">📐</span><strong>Prototyp / makieta</strong></div>';
             }
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('project-page').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showMainPage() {
-            document.getElementById('project-page').style.display = 'none';
-            document.getElementById('main-page').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function showMainPage(pushHistory = true) {
+    document.getElementById('project-page').style.display = 'none';
+    document.getElementById('main-page').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (pushHistory) {
+        history.pushState({}, '', window.location.pathname);
+    }
+}
+
+// Nowe — obsługa strzałek przeglądarki:
+window.addEventListener('popstate', function(e) {
+    if (e.state && e.state.project) {
+        showProject(e.state.project, false);
+    } else {
+        showMainPage(false);
+    }
+});
+
+// Nowe — obsługa odświeżenia strony gdy URL ma hash (#somna itp.):
+(function() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && projects[hash]) {
+        showProject(hash, false);
+    }
+})();
 
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
