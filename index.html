@@ -77,6 +77,34 @@
             list-style: none;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .lang-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(72, 61, 32, 0.25);
+            background: transparent;
+            color: var(--primary-brown);
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .lang-toggle-btn:hover {
+            background: var(--primary-brown);
+            color: var(--white);
+        }
+
         nav a {
             color: var(--text-dark);
             text-decoration: none;
@@ -744,7 +772,7 @@ gallery-image {
             border: none;
         }
         .lightbox-close:hover { color: white; }
-        .project-credits { margin-top: 40px; padding: 14px 18px; background: rgba(72,61,32,0.05); border-left: 3px solid var(--primary-brown); ... }
+        .project-credits { margin-top: 40px; padding: 14px 18px; background: rgba(72,61,32,0.05); border-left: 3px solid var(--primary-brown); border-radius: 6px; font-size: 14px; line-height: 1.6; }
         .project-credits-label { font-weight: 600; color: var(--primary-brown); }
     </style>
 </head>
@@ -755,11 +783,14 @@ gallery-image {
         <div class="container">
             <nav>
                 <a class="logo" style="cursor:pointer;text-decoration:none;" onclick="showMainPage()">FM</a>
-                <ul>
-                    <li><a href="#projects">Projekty</a></li>
-                    <li><a href="#experience" onclick="openExperienceModal(event)">Doświadczenie</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
-                </ul>
+                <div class="nav-right">
+                    <ul>
+                        <li><a href="#projects">Projekty</a></li>
+                        <li><a href="#experience" onclick="openExperienceModal(event)">Doświadczenie</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                    <button id="lang-toggle" class="lang-toggle-btn" onclick="toggleLang()" aria-label="Switch language / Zmień język">EN</button>
+                </div>
             </nav>
         </div>
     </header>
@@ -1020,10 +1051,10 @@ gallery-image {
             
             <div style="margin-top: 40px;">
                 <div style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(72, 61, 32, 0.1);">
-                    <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-brown); margin-bottom: 8px;">Kwiecień – Lipiec 2025</div>
-                    <h3 style="font-family: 'Crimson Text', serif; font-size: 24px; color: var(--primary-brown); margin-bottom: 6px;">Junior Chatbot Designer</h3>
+                    <div id="exp1-date" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-brown); margin-bottom: 8px;">Kwiecień – Lipiec 2025</div>
+                    <h3 id="exp1-title" style="font-family: 'Crimson Text', serif; font-size: 24px; color: var(--primary-brown); margin-bottom: 6px;">Junior Chatbot Designer</h3>
                     <div style="font-size: 14px; color: var(--text-light); margin-bottom: 12px;">Perfectbot.ai</div>
-                    <p style="font-size: 14px; color: var(--text-medium); line-height: 1.7;">
+                    <p id="exp1-desc" style="font-size: 14px; color: var(--text-medium); line-height: 1.7;">
                         Projektowałem i optymalizowałem scenariusze konwersacyjne dla klientów z sektora e-commerce i usług. 
                         Przeprowadzałem analizę danych z interakcji użytkowników (UX Research). Współpracowałem z zespołami deweloperskimi 
                         dbając o spójność komunikacji z marką (Tone of Voice). Monitorowałem wydajność chatbotów na żywych organizmach 
@@ -1032,10 +1063,10 @@ gallery-image {
                 </div>
 
                 <div style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(72, 61, 32, 0.1);">
-                    <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-brown); margin-bottom: 8px;">Maj – Grudzień 2025</div>
-                    <h3 style="font-family: 'Crimson Text', serif; font-size: 24px; color: var(--primary-brown); margin-bottom: 6px;">Kelner</h3>
+                    <div id="exp2-date" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-brown); margin-bottom: 8px;">Maj – Grudzień 2025</div>
+                    <h3 id="exp2-title" style="font-family: 'Crimson Text', serif; font-size: 24px; color: var(--primary-brown); margin-bottom: 6px;">Kelner</h3>
                     <div style="font-size: 14px; color: var(--text-light); margin-bottom: 12px;">Lavanda Restaurant, Młochów</div>
-                    <p style="font-size: 14px; color: var(--text-medium); line-height: 1.7;">
+                    <p id="exp2-desc" style="font-size: 14px; color: var(--text-medium); line-height: 1.7;">
                         Zarządzałem relacjami z klientem w środowisku wysokiej presji czasu, zapewniając wysoką jakość Customer Experience. 
                         Efektywnie współpracowałem w zespole operacyjnym. Rozwiązywałem problemy bieżące w sytuacjach stresowych, 
                         rozwijając kompetencje komunikacyjne i zarządzanie priorytetami.
@@ -1043,10 +1074,10 @@ gallery-image {
                 </div>
 
                 <div>
-                    <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-brown); margin-bottom: 8px;">Lipiec – Wrzesień 2023</div>
-                    <h3 style="font-family: 'Crimson Text', serif; font-size: 24px; color: var(--primary-brown); margin-bottom: 6px;">Praktykant działu HR</h3>
+                    <div id="exp3-date" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-brown); margin-bottom: 8px;">Lipiec – Wrzesień 2023</div>
+                    <h3 id="exp3-title" style="font-family: 'Crimson Text', serif; font-size: 24px; color: var(--primary-brown); margin-bottom: 6px;">Praktykant działu HR</h3>
                     <div style="font-size: 14px; color: var(--text-light); margin-bottom: 12px;">Jeronimo Martins Polska S.A., Wyszków</div>
-                    <p style="font-size: 14px; color: var(--text-medium); line-height: 1.7;">
+                    <p id="exp3-desc" style="font-size: 14px; color: var(--text-medium); line-height: 1.7;">
                         Wspierałem operacyjnie zarządzanie logistyką paneli rekrutacyjnych dla kandydatów na stanowiska kierownicze. 
                         Realizowałem procesy rekrutacyjne, w tym aktywną selekcję CV i screening kandydatów. 
                         Prowadziłem analizę konkurencji na rynku pracy, pozwalając na skuteczniejsze dotarcie do grupy docelowej.
@@ -1113,9 +1144,9 @@ const projects = {
 
     <p><strong>Kluczowe moduły:</strong></p>
     <p>
-        <p><strong>SleepMatch:</strong> Mechanizm grywalizacji oparty na self-monitoringu. Użytkownik „obstawia” parametry snu, co buduje sprawstwo (<em>self-efficacy</em>).</p>
-        <p><strong>SleepSnaps:</strong> Mikro-edukacja minimalizująca obciążenie poznawcze.</p>
-        <p><strong>System motywacyjny:</strong> Punkty promujące regularność zamiast presji wyniku.</p>
+        <p><strong>SleepMatch:</strong> Mechanizm grywalizacji oparty na self-monitoringu. Użytkownik „obstawia” parametry snu, co buduje sprawstwo (<em>self-efficacy</em>). Aby zapewnić dokładność i obiektywne śledzenie postępów, mechanizm obstawiania jest dynamicznie porównywany z danymi o śnie w czasie rzeczywistym, synchronizowanymi ze smartwatcha użytkownika.</p>
+        <p><strong>SleepSnaps:</strong> Mikro-edukacja w formie krótkich, „tiktokowych” filmików (shortsów), minimalizująca obciążenie poznawcze.</p>
+        <p><strong>System motywacyjny:</strong> Punkty promujące regularność zamiast presji wyniku – użytkownik zdobywa je za trafne obstawianie statystyk swojego snu.</p>
     </p>
 
     <p><strong>Refleksja projektowa:</strong></p>
@@ -1342,8 +1373,248 @@ bodyimage: {
 }
         };
 
+const projectsEN = {
+    somna: {
+        tag: 'Behavioral Design & UX',
+        title: 'Somna',
+        lead: 'A digital behavioral intervention closing the gap between intention and action in sleep hygiene.',
+        description: `
+<p>Somna is a web-based intervention project supporting sleep hygiene and health-promoting motivation. Unlike standard apps, Somna actively helps users close the so-called <em>intention-action gap</em>.</p>
+
+    <p><strong>Research foundations:</strong></p>
+    <p>The project builds on the results of our pre-implementation research, in which <strong>69.1% of respondents</strong> declared readiness to use digital wellbeing tools. We applied a rigorous theoretical approach, drawing on the Fogg Behavior Model and the taxonomy of Behavior Change Techniques (BCTs).</p>
+
+    <p><strong>Key modules:</strong></p>
+    <p>
+        <p><strong>SleepMatch:</strong> A gamification mechanism based on self-monitoring. The user "bets" on their sleep parameters, which builds a sense of agency (<em>self-efficacy</em>). To ensure accuracy and objective progress tracking, this betting mechanism is dynamically compared with real-time sleep data synced from the user's smartwatch.</p>
+        <p><strong>SleepSnaps:</strong> Micro-education delivered as short, TikTok-style videos (shorts), designed to minimize cognitive load.</p>
+        <p><strong>Motivation system:</strong> Points that reward consistency rather than pressuring users toward a perfect outcome — earned by correctly predicting one's own sleep statistics.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>Somna challenged me to translate advanced psychological theory into concrete, intuitive interfaces. The hardest part was designing the <em>SleepMatch</em> mechanism to feel engaging rather than stressful — we achieved this through a reward system that promotes body awareness instead of chasing perfect results. The project taught me how to balance scientific rigor (an RCT protocol) with a light UX touch that genuinely helps users instead of overwhelming them.</p>
+`,
+        highlights: [
+            'Designing an evidence-based intervention (EBP)',
+            'Applying Behavior Change Techniques (BCTs)',
+            'Analyzing pre-implementation research data',
+            'Gamification and engagement-mechanic design',
+            'Qualitative (IDI) and quantitative (RCT protocol) research'
+        ],
+        images: ["somna_logo.png", 'Widoki_somna.png'],
+        credits: 'Team project — co-authors: Julia Chabińska, Nina Lange'
+    },
+    ghost: {
+        tag: 'Therapeutic APP',
+        title: 'GhostAway',
+        lead: 'A digital psychological intervention (ICBT) reducing telecommunication anxiety and communication procrastination in young adults.',
+        description: `
+<p>GhostAway is a mobile web-intervention project designed for people who experience strong resistance and stress before entering synchronous or asynchronous interactions. The project actively counters avoidance strategies (so-called <em>ghosting</em>) and the procrastination associated with putting off replies to texts and emails.</p>
+
+    <p><strong>Research foundations:</strong></p>
+    <p>The app's theoretical model is based on internet-delivered Cognitive Behavioral Therapy (ICBT) and Albert Bandura's Self-Efficacy Theory. The intervention's structure is designed to build the user's sense of agency through four sources of efficacy (mastery experiences, modeling, verbal persuasion, and continuous monitoring of emotional state).</p>
+
+    <p><strong>Key modules:</strong></p>
+    <p>
+        <p><strong>Educational Chatbot:</strong> A 24/7 tool that delivers psychoeducation, analyzes the user's responses, and offers instant feedback to help relieve emotional tension.</p>
+        <p><strong>Interactive Task Panel:</strong> A safe simulation environment (fictional SMS/email messages) with increasing difficulty, using a <em>Timer</em> mechanism to encourage faster decision-making.</p>
+        <p><strong>Habit-Building System:</strong> A gamification mechanism based on maintaining a daily streak and collecting coins that can be exchanged to customize a personal avatar.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>GhostAway challenged our team to design an experience that operates in the sensitive territory of social anxiety while still needing to motivate action through gamification. The key to success was balancing the dopamine loop (task → coins → customization) with stress-relieving elements, such as daily monitoring of anxiety levels on a 1–5 scale. The project showed me how crucial it is in Digital Therapeutics (DTx) to create a "safe testing ground" where users can make mistakes and build habits without feeling judged.</p>
+`,
+        highlights: [
+            'Designing digital psychological interventions (ICBT)',
+            "Implementing Albert Bandura's Self-Efficacy theory within a UX structure",
+            'Designing habit-building mechanics (streaks, dopamine loops)',
+            'Applying controlled exposure and simulation within the interface',
+            'Developing an evaluation methodology (experiment, dedicated questionnaire, SUS)'
+        ],
+        images: ["logo_ghost.png", "widoki_ghost.png"],
+        credits: 'Team project — co-authors: Julia Chabińska, Nina Lange, Konstanty Paszkowski'
+    },
+    water: {
+        tag: 'PRO-ENVIRONMENTAL',
+        title: 'Every Drop Counts',
+        lead: 'An eco-friendly campaign based on behavioral habit-change techniques aimed at reducing unnecessary household water consumption.',
+        description: `
+<p>The "Every Drop Counts" project was created in response to an assigned design brief for a municipal water utility. The challenge was to build a psychological program addressing a 20% rise in city water consumption driven by residents' everyday habits rather than industry.</p>
+
+    <p><strong>Research foundations:</strong></p>
+    <p>The project's theoretical model draws on Trope and Liberman's <em>Construal Level Theory</em> and the <em>Transtheoretical Model of Change</em>. The intervention focuses on reducing the psychological distance between abstract water consumption and concrete environmental consequences, moving users from precontemplation toward readiness to change.</p>
+
+    <p><strong>Key modules:</strong></p>
+    <p>
+        <p><strong>Personalized Feedback (Descriptive/Normative):</strong> A mechanism providing concrete consumption data compared against the neighborhood average, making the scale of yearly differences tangible.</p>
+        <p><strong>Problem-Reattribution Module:</strong> An educational module correcting the misconception that water consumption depends solely on industry, highlighting the direct impact of household habits.</p>
+        <p><strong>Visual communication:</strong> A system of posters and messages that translate abstract data (e.g. the annual needs of thousands of households) into tangible terms to make the consequences of behavior more real.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>Designing the campaign required turning abstract statistics into language the average city resident could understand. The key challenge was shifting responsibility (reattribution) from external factors to individual agency without triggering guilt. The project proved how important it is in pro-environmental communication to make distant climate effects "concrete," which more effectively motivates changes in everyday habits.</p>
+`,
+        highlights: [
+            'Developing a habit-change strategy based on Trope & Liberman theory',
+            'Optimizing pro-environmental communication using social norms',
+            "Increasing recipients' sense of agency through normative feedback",
+            'Designing an educational campaign focused on reducing psychological distance',
+            'Analyzing consumer behavior and motivation within the transtheoretical model'
+        ],
+        images: ["water_logo.png", "water_view.png"]
+    },
+    motoflow: {
+        tag: 'Business Analysis',
+        title: 'MotoFlow',
+        lead: 'A comprehensive business analysis of a car-service management system aimed at eliminating queues and communication chaos through a "stress-free service" model.',
+        description: `
+<p>MotoFlow is a project implementing the vision of a "queue-free, stress-free service," making car maintenance as intuitive as ordering food. The project was created in response to real industry challenges: seasonality, communication chaos, and the growing risk of missed vehicle inspection deadlines.</p>
+
+    <p><strong>Analytical foundations:</strong></p>
+    <p>A multi-method approach was applied, combining macro-environment tools (PESTLE, Porter's Five Forces) with strategic analysis (SWOT/TOWS). The project covered the full path: from identifying stakeholders (diagnosticians, mechanics, warehouse staff) to business-process modeling and feature prioritization for a 750,000 PLN operating budget.</p>
+
+    <p><strong>Key modules:</strong></p>
+    <p>
+        <p><strong>Process Management (As-Is / To-Be):</strong> Optimizing the workflows of an 8–10 person operations team using tablets for real-time task-status management.</p>
+        <p><strong>SKP Guard Module:</strong> An innovative solution automating reminders for vehicle inspections (14, 7, and 3 days before the deadline) and in-app payments, protecting customers from fines.</p>
+        <p><strong>Predictive Maintenance Ecosystem:</strong> A feature integrating tire-tread diagnostics with CRM systems, enabling personalized service offers based on the vehicle's technical condition.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>MotoFlow demonstrated how crucial it is in business analysis to understand the shift from a "retail customer" model to fleet service. The challenge was balancing the low barriers to entry in the automotive industry by building a high technological barrier instead. Thanks to precise stakeholder analysis, we managed to map the processes so the system not only automated technical aspects of service but, above all, improved user experience in stressful, emergency situations.</p>
+`,
+        highlights: [
+            'Conducting a strategic SWOT/TOWS and PESTLE analysis',
+            'Applying the KANO and MoSCoW methodologies to prioritize the backlog',
+            'Optimizing workshop processes (As-Is / To-Be) for 2-person teams',
+            'Identifying and analyzing stakeholders (IDI) within the workshop structure',
+            'Building a system-scaling strategy: from retail customers to fleet service'
+        ],
+        images: ["motoflow_logo.png", "motoflow_view.png"],
+        credits: 'Team project — co-authors: Julia Chabińska, Nina Lange, Konstanty Paszkowski'
+    },
+    smarthome: {
+        tag: 'UX Research', title: 'Smart Home Insights',
+        lead: 'A study of IoT-system user needs using ethnomethodological research approaches.',
+        description: `
+    <p>A research project focused on understanding how Smart Home technology integrates into the everyday lives of modern city residents. The goal was to go beyond the technical aspects of devices and reach the authentic emotions, concerns, and expectations of people actively using smart-home solutions.</p>
+
+    <p><strong>Research methodology:</strong></p>
+    <p>The process relied on individual in-depth interviews (IDIs) conducted in respondents' natural environments. The collected material underwent rigorous thematic analysis, allowing us to identify key categories such as the impact on comfort, sense of security, and the boundaries of technology's involvement in private life.</p>
+
+    <p><strong>Key areas of analysis:</strong></p>
+    <p>
+        <p><strong>Human–Machine Relationship:</strong> Examining the bond with technology and the phenomenon of device anthropomorphization, which — according to the findings — turns devices into a kind of "life companion" for users.</p>
+        <p><strong>Boundaries of Control:</strong> Analyzing the fear of full system autonomy and identifying residents' need to retain agency and decision-making power.</p>
+        <p><strong>Barriers and Opportunities (SWOT):</strong> Mapping configuration and data-privacy issues against benefits such as time savings and improved health and quality of life.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>The research revealed that the success of Smart Home technology depends not solely on how advanced it is, but on the ability to maintain a balance between support and invasiveness. Users seek "invisible" technology that automates routines without taking away control of their home. This work became the substantive foundation for hardware projects such as Sunseeker, defining standards for trust- and wellbeing-oriented design.</p>
+`,
+        highlights: [
+            'Designing and conducting original in-depth interview (IDI) scenarios',
+            'Applying thematic analysis and coding to identify user behavior patterns',
+            'Identifying psychological "autonomy boundaries" as a key factor in technology acceptance',
+            'Developing a strategic SWOT analysis for the Smart Home solutions ecosystem',
+            'Synthesizing research findings into a report supporting User-Centered Design processes'
+        ],
+        images: ["smarthome_logo.png", "smarthome_view.png"],
+        credits: 'Team project — co-authors: Maja Bińkiewicz, Bartłomiej Adamiec, Zuzanna Bednarek, Antoni Zalewski'
+    },
+    fridgely: {
+        tag: 'AI & Innovation',
+        title: 'Fridgely',
+        lead: 'An original mobile app supporting food-waste reduction through smart inventory management and advanced gamification.',
+        description: `
+<p>Fridgely was created in response to personal challenges with food waste. The app turns the routine chore of tracking expiration dates into an engaging game, combining practical pantry management with a strong social component.</p>
+
+    <p><strong>Product foundations:</strong></p>
+    <p>At Fridgely's core is an integration with an external recipe-generation API that automatically suggests dishes based on soon-to-expire products. The system was designed to minimize the barrier to entry and make "rescuing food" a satisfying experience.</p>
+
+    <p><strong>Technical challenges:</strong></p>
+    <p>The biggest challenge in the project is ensuring stable operation of the <em>Fridgely AI</em> module. Integrating with an external API key requires building an error-resilient middleware layer that handles rate limits, response delays, and specific input-data formatting. Work on this module is essential for keeping the app running smoothly under a high volume of recipe requests.</p>
+
+    <p><strong>Key modules:</strong></p>
+    <p>
+        <p><strong>Smart Inventory & Notifications:</strong> A smart-notification system that warns users when products are about to expire.</p>
+        <p><strong>Community Recipe Board:</strong> A platform for sharing experiences, where users post recipes created from "rescued" products.</p>
+        <p><strong>Progression System (XP & Coins):</strong> A gamification mechanism — users earn experience and currency for consistency and pro-environmental activity.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>Fridgely proves how effectively technology can be paired with building good habits. From the start, the project was built in the spirit of vibecoding — a process based on intuitive, rapid prototyping, where the priority was achieving the right app "flow" and user satisfaction rather than rigidly sticking to initial assumptions. The technical challenge was balancing the complexity of AI algorithms (Fridgely AI) with interface simplicity. The project taught me how important application resilience to external service (API) failures is in modern development, and how much polished, emotional design — which I developed based on my own needs — contributes to user retention.</p>
+`,
+        highlights: [
+            'Managing external API integration in a production environment',
+            'Designing the full end-to-end user journey',
+            'Implementing an advanced gamification system (XP, levels, economy)',
+            'Optimizing the performance of AI modules in mobile applications',
+            'Building a retention strategy based on personalization'
+        ],
+        images: ["fridgely_logo.png", "fridgely_view.png", "fridgely_view2.png"],
+    },
+    sunseeker: {
+        tag: 'Product Design',
+        title: 'Sunseeker',
+        lead: 'An eco-friendly campaign based on behavioral habit-change techniques aimed at reducing unnecessary household water consumption.',
+        description: `
+<p>The "Every Drop Counts" project was created in response to an assigned design brief for a municipal water utility. The challenge was to build a psychological program addressing a 20% rise in city water consumption driven by residents' everyday habits rather than industry.</p>
+
+    <p><strong>Research foundations:</strong></p>
+    <p>The project's theoretical model draws on Trope and Liberman's <em>Construal Level Theory</em> and the <em>Transtheoretical Model of Change</em>. The intervention focuses on reducing the psychological distance between abstract water consumption and concrete environmental consequences, moving users from precontemplation toward readiness to change.</p>
+
+    <p><strong>Key modules:</strong></p>
+    <p>
+        <p><strong>Personalized Feedback (Descriptive/Normative):</strong> A mechanism providing concrete consumption data compared against the neighborhood average, making the scale of yearly differences tangible.</p>
+        <p><strong>Problem-Reattribution Module:</strong> An educational module correcting the misconception that water consumption depends solely on industry, highlighting the direct impact of household habits.</p>
+        <p><strong>Visual communication:</strong> A system of posters and messages that translate abstract data (e.g. the annual needs of thousands of households) into tangible terms to make the consequences of behavior more real.</p>
+    </p>
+
+    <p><strong>Design reflection:</strong></p>
+    <p>Designing the campaign required turning abstract statistics into language the average city resident could understand. The key challenge was shifting responsibility (reattribution) from external factors to individual agency without triggering guilt. The project proved how important it is in pro-environmental communication to make distant climate effects "concrete," which more effectively motivates changes in everyday habits.</p>
+`,
+        highlights: ['Developing a "Smart Fridge"-type application', 'Integrating barcode scanning (barcode API)', 'A virtual fridge with a product catalog', 'An expiration-date notification system', 'AI-generated recipes based on available products', 'Project built using vibecoding (AI-assisted development)'],
+        images: ['sunseeker_logo.png', 'sunseeker_view.png'],
+        credits: 'Team project — co-authors: Julia Chabińska, Maja Bińkiewicz, Lena Ziemlewska, Bartłomiej Adamiec'
+    },
+    bodyimage: {
+        tag: 'Bachelor Thesis • In Progress',
+        title: 'Positive Body Image',
+        lead: "A digital micro-intervention project supporting positive body image among strength-training individuals — needs assessment and solution prototyping.",
+        description: `
+<p>This project is carried out as part of a bachelor's thesis in Psychology and Computer Science. Its goal is to design and preliminarily validate an internet-based micro-intervention aimed at promoting a positive body image among people who do strength training — a response to today's challenges around visual pressure in fitness environments.</p>
+
+<p><strong>Research assumptions:</strong></p>
+<p>The thesis combines scientific methodological rigor with design practice. The research focuses on user-needs analysis and building a mobile-app prototype that uses Behavior Change Techniques (BCTs) to improve users' psychological wellbeing.</p>
+
+<p><strong>Key aspects of the work:</strong></p>
+<p>
+    <ul>
+        <li><strong>Literature review:</strong> A review of the latest research on <em>fitspiration</em> and <em>thinspiration</em>, among other topics, and their impact on body image.</li>
+        <li><strong>Prototype design:</strong> Building an app interface that supports an adaptive perception of one's own body.</li>
+        <li><strong>Qualitative research:</strong> Analyzing the needs of strength-training individuals in the context of their relationship with their own body.</li>
+    </ul>
+</p>
+
+<p><strong>Status:</strong></p>
+<p>The project is currently in progress. The work covers the full process: from defining the research problem, through a review of the theory, to preparing the prototype structure and empirical research methodology.</p>
+`,
+        highlights: [
+            'Designing an evidence-based internet psychological intervention',
+            'Integrating positive psychology with UX/UI design',
+            'Applying Behavior Change Techniques',
+            'Analyzing the needs and experiences of physically active individuals',
+            'A thesis bridging psychology and computer science',
+            'Research on the impact of digital media on body image'
+        ],
+        images: []
+    }
+};
+
 function showProject(id, pushHistory = true) {
-    const p = projects[id];
+    const dataset = (typeof currentLang !== 'undefined' && currentLang === 'en' && typeof projectsEN !== 'undefined' && projectsEN[id]) ? projectsEN : projects;
+    const p = dataset[id];
     if (!p) return;
     if (pushHistory) {
         history.pushState({ project: id }, '', '#' + id);
@@ -1464,6 +1735,131 @@ window.addEventListener('popstate', function(e) {
         document.querySelectorAll('.project-card').forEach(el => {
             observer.observe(el);
         });
+
+        // ---- PL/EN language toggle ----
+        const LANG_STORAGE_KEY = 'fm_portfolio_lang';
+        let currentLang = 'pl';
+        try {
+            currentLang = localStorage.getItem(LANG_STORAGE_KEY) || 'pl';
+        } catch (e) {}
+
+        const staticTranslations = [
+            { selector: 'nav ul li a[href="#projects"]', en: 'Projects' },
+            { selector: 'nav ul li a[href="#experience"]', en: 'Experience' },
+            { selector: 'nav ul li a[href="#contact"]', en: 'Contact' },
+            { selector: '.hero-subtitle', en: 'Project Portfolio' },
+            { selector: '.hero-description', html: true, en: `
+            I help build digital products, combining rigorous behavioral research with a modern approach to development.
+            In interdisciplinary teams I take responsibility <strong>for UX Research, data analysis (R), and interaction strategy, among other things</strong>.
+            I don't guess — I design based on insights, test hypotheses, and deliver solutions that genuinely solve users' problems.
+                ` },
+            { selector: '.hero-cta a.btn-primary', en: 'View Projects' },
+            { selector: '.hero-cta a.btn-secondary', en: 'Contact' },
+            { selector: '#projects .section-title', en: 'Projects' },
+
+            { selector: "[onclick=\"showProject('somna')\"] p", en: 'An app supporting sleep hygiene based on behavior-change models. I ran the research and built a UX prototype with personalization.' },
+            { selector: "[onclick=\"showProject('ghost')\"] p", en: 'A tool supporting the reduction of telecommunication anxiety. Exposure techniques and interactive simulations.' },
+            { selector: "[onclick=\"showProject('water')\"] h3", en: 'Every Drop Counts' },
+            { selector: "[onclick=\"showProject('water')\"] p", en: 'A behavioral project on water-consumption habit change. Optimizing pro-environmental communication.' },
+            { selector: "[onclick=\"showProject('motoflow')\"] p", en: 'Business analysis of a car-service company using the SWOT, KANO, and MoSCoW methodologies.' },
+            { selector: "[onclick=\"showProject('smarthome')\"] p", en: 'A study of IoT-system user needs. Ethnomethodological IDIs, personas, and user-journey mapping.' },
+            { selector: "[onclick=\"showProject('fridgely')\"] p", en: 'A food-management app with AI-generated recipes and barcode scanning.' },
+            { selector: "[onclick=\"showProject('sunseeker')\"] p", en: 'A study of IoT-system user needs. Ethnomethodological IDIs, personas, and user-journey mapping.' },
+            { selector: "[onclick=\"showProject('bodyimage')\"] p", en: "A bachelor's thesis project on an internet-based intervention supporting a positive body image among strength-training individuals." },
+
+            { selector: '.project-view-btn', en: 'More details →' },
+            { selector: '.project-page-back', en: '← Back to projects' },
+            { selector: '.project-description-block h2', en: 'About the project' },
+            { selector: '.project-highlights-title strong', en: 'Key activities' },
+
+            // Somna modal
+            { selector: '#modal-somna .modal-description', en: 'A sleep-hygiene support app project based on behavior-change models.' },
+            { selector: '#modal-somna .modal-highlights', html: true, en: '<li>Designing an app to support sleep hygiene</li><li>Applying Behavior Change Techniques</li><li>Running a full research cycle (IDIs, surveys)</li><li>Building a UX prototype focused on personalized feedback</li><li>Qualitative and quantitative research with real users</li>' },
+            // Ghost Away modal
+            { selector: '#modal-ghost .modal-description', en: 'An original tool project supporting the reduction of telecommunication anxiety.' },
+            { selector: '#modal-ghost .modal-highlights', html: true, en: '<li>Applying exposure techniques within a mobile app</li><li>Interactive simulations for building confidence</li><li>A personalized therapeutic pathway</li><li>An interface supporting user progress</li><li>Integrating gamification elements</li>' },
+            // Water modal
+            { selector: '#modal-water h2', en: 'Every Drop Counts' },
+            { selector: '#modal-water .modal-description', en: 'A behavioral project on water-consumption habit change based on Construal-Level Theory.' },
+            { selector: '#modal-water .modal-highlights', html: true, en: '<li>Developing a habit-change strategy based on Trope & Liberman theory</li><li>Optimizing pro-environmental communication</li><li>Increasing the audience\'s sense of agency</li><li>Designing an educational campaign</li><li>Analyzing consumer behavior and motivation</li>' },
+            // MotoFlow modal
+            { selector: '#modal-motoflow .modal-description', en: 'A business analysis of a car-service company based on a case study using analytical methodologies.' },
+            { selector: '#modal-motoflow .modal-highlights', html: true, en: '<li>Conducting a SWOT/TOWS analysis</li><li>Applying the KANO methodology to prioritize features</li><li>Using MoSCoW for requirements management</li><li>Writing user stories for the development team</li><li>Optimizing staff workflows (As-Is / To-Be)</li>' },
+            // Smart Home modal
+            { selector: '#modal-smarthome .modal-description', en: 'A study of IoT-system user needs using ethnomethodological research approaches.' },
+            { selector: '#modal-smarthome .modal-highlights', html: true, en: '<li>Conducting qualitative research (ethnomethodology, IDIs)</li><li>Creating detailed user personas</li><li>User Journey Mapping</li><li>Analyzing pain points and needs</li><li>Translating insights into functional requirements</li>' },
+            // Fridgely modal
+            { selector: '#modal-fridgely .modal-description', en: 'An original food-management app integrating AI and barcode scanning.' },
+            { selector: '#modal-fridgely .modal-highlights', html: true, en: '<li>Developing a "Smart Fridge"-type application</li><li>Integrating barcode scanning (barcode API)</li><li>A virtual fridge with a product catalog</li><li>An expiration-date notification system</li><li>AI-generated recipes based on available products</li><li>Project built using vibecoding (AI-assisted development)</li>' },
+            // Sunseeker modal
+            { selector: '#modal-sunseeker .modal-description', en: 'An original food-management app integrating AI and barcode scanning.' },
+            { selector: '#modal-sunseeker .modal-highlights', html: true, en: '<li>Developing a "Smart Fridge"-type application</li><li>Integrating barcode scanning (barcode API)</li><li>A virtual fridge with a product catalog</li><li>An expiration-date notification system</li><li>AI-generated recipes based on available products</li><li>Project built using vibecoding (AI-assisted development)</li>' },
+
+            // Experience modal
+            { selector: '#modal-experience h2', en: 'Experience' },
+            { selector: '#exp1-date', en: 'April – July 2025' },
+            { selector: '#exp1-title', en: 'Junior Chatbot Designer' },
+            { selector: '#exp1-desc', en: "I designed and optimized conversation scenarios for clients in the e-commerce and services sectors. I analyzed user-interaction data (UX Research). I worked with development teams to keep communication consistent with the brand's tone of voice. I monitored chatbot performance in production together with key clients." },
+            { selector: '#exp2-date', en: 'May – December 2025' },
+            { selector: '#exp2-title', en: 'Waiter' },
+            { selector: '#exp2-desc', en: 'I managed customer relationships in a high time-pressure environment, ensuring a high-quality Customer Experience. I collaborated effectively within the operations team. I resolved on-the-spot problems in stressful situations, developing my communication skills and priority management.' },
+            { selector: '#exp3-date', en: 'July – September 2023' },
+            { selector: '#exp3-title', en: 'HR Department Intern' },
+            { selector: '#exp3-desc', en: 'I provided operational support for managing the logistics of recruitment panels for managerial candidates. I carried out recruitment processes, including active CV screening and candidate selection. I conducted labor-market competitor analysis, enabling more effective outreach to the target group.' },
+
+            // Contact & footer
+            { selector: '#contact h2', en: 'Want to get in touch?' },
+            { selector: '.contact-content > p', en: "I'm open to new challenges, projects, and collaboration. Feel free to reach out!" },
+            { selector: 'footer p', en: '© 2026 Franciszek Mielcarz. Design with a psychological perspective.' },
+        ];
+
+        function initTranslations() {
+            staticTranslations.forEach(t => {
+                document.querySelectorAll(t.selector).forEach(el => {
+                    if (el.dataset.plCached) return;
+                    el.dataset.pl = t.html ? el.innerHTML : el.textContent;
+                    el.dataset.en = t.en;
+                    el.dataset.plCached = '1';
+                    el.dataset.useHtml = t.html ? '1' : '0';
+                });
+            });
+        }
+
+        function applyLang(lang) {
+            currentLang = lang;
+            try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (e) {}
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-pl-cached="1"]').forEach(el => {
+                const value = lang === 'en' ? el.dataset.en : el.dataset.pl;
+                if (el.dataset.useHtml === '1') {
+                    el.innerHTML = value;
+                } else {
+                    el.textContent = value;
+                }
+            });
+
+            const toggleBtn = document.getElementById('lang-toggle');
+            if (toggleBtn) {
+                toggleBtn.textContent = lang === 'pl' ? 'EN' : 'PL';
+            }
+
+            // Re-render project subpage if it's currently open, in the new language
+            const projectPage = document.getElementById('project-page');
+            if (projectPage && projectPage.style.display !== 'none') {
+                const hash = window.location.hash.replace('#', '');
+                if (hash && projects[hash]) {
+                    showProject(hash, false);
+                }
+            }
+        }
+
+        function toggleLang() {
+            applyLang(currentLang === 'pl' ? 'en' : 'pl');
+        }
+
+        initTranslations();
+        applyLang(currentLang);
     </script>
 </body>
 </html>
